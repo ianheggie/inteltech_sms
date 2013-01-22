@@ -3,7 +3,7 @@
 InteltechSms is a ruby gem that provides an InteltechSms class to check credit and send SMS text messages to single or multiple recipients
 
 == Contributing to inteltech_sms
- 
+
 * Check out the latest master to make sure the feature hasn't been implemented or the bug hasn't been fixed yet.
 * Check out the issue tracker to make sure someone already hasn't requested it and/or contributed it.
 * Fork the project.
@@ -21,9 +21,7 @@ As a Plugin (eg rails 2.3.x)
 
 As a Gem from gemcutter
 
-    % gem install inteltech_sms    
-    # Add the following line to Gemfile
-    gem "inteltech_sms"
+    % gem install inteltech_sms
 
 == Usage
 
@@ -32,6 +30,8 @@ You will require an account with inteltech.com.au for the username and secret ke
 Note: Inteltech's gateway assumes numbers not in international format (ie starting with a plus sign) are australian numbers.
 
 Example ruby code:
+
+    require 'rubygems'
 
     require 'inteltech_sms'
 
@@ -42,11 +42,11 @@ Example ruby code:
     test_sms2 = '+8611111111111'
     landline_sms = '0862252608' # Inteltech's landline number
 
-    gateway = Inteltech.new(username, secure_key)
+    gateway = InteltechSms.new(username, secure_key)
 
     credit = gateway.get_credit.inspect
 
-    puts "You have #{credit} Credit left"
+    puts "You have #{credit} Credit/s left"
 
     begin
       res = gateway.send_sms(test_sms,'Test from Ruby')
@@ -55,16 +55,12 @@ Example ruby code:
       puts "send_sms to #{res.sms} failed. Gateway response #{ex.response.class} with code #{ex.response.response_code}."
     end
 
-    res2 = gateway.send_multiple_sms([test_sms, test_sms2, landline_sms],'Test from Ruby (expecting first two to pass and last to fail)')
+    res2 = gateway.send_multiple_sms([test_sms, test_sms2, landline_sms],'Test from Ruby to multiple numbers')
 
     puts "send_multiple_sms (sending to mobiles should work, sending to a landline should fail):"
     puts res2.collect {|r| "sms to #{r.sms} #{r.success? ? 'was successfull' : "failed (#{r.class} with code #{r.response_code})"}."}.join("\n")
 
-    exit 0
+== Copyright
 
-
-    == Copyright
-
-    Copyright (c) 2013 Ian Heggie. See LICENSE.txt for
-    further details.
+Copyright (c) 2013 Ian Heggie. See LICENSE.txt for further details.
 
