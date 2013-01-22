@@ -9,11 +9,16 @@ GEM
       rake
       rdoc
     json (1.7.6)
+    multi_json (1.5.0)
     rake (10.0.3)
     rcov (1.0.0)
     rdoc (3.12)
       json (~> 1.4)
     shoulda-context (1.0.2)
+    simplecov (0.7.1)
+      multi_json (~> 1.0)
+      simplecov-html (~> 0.7.1)
+    simplecov-html (0.7.1)
     travis-lint (1.5.0)
       hashr (~> 0.0.22)
 
@@ -26,4 +31,5 @@ DEPENDENCIES
   rcov
   rdoc (~> 3.12)
   shoulda-context
+  simplecov
   travis-lint

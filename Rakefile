@@ -32,22 +32,32 @@ Rake::TestTask.new(:test) do |test|
   test.verbose = true
 end
 
-require 'rcov/rcovtask'
-Rcov::RcovTask.new do |test|
-  test.libs << 'test'
-  test.pattern = 'test/**/test_*.rb'
-  test.verbose = true
-  test.rcov_opts << '--exclude "gems/*"'
+begin
+  require 'rcov/rcovtask'
+  Rcov::RcovTask.new do |test|
+    test.libs << 'test'
+    test.pattern = 'test/**/test_*.rb'
+    test.verbose = true
+    test.rcov_opts << '--exclude "gems/*"'
+  end
+rescue LoadError
+  puts "rcov (or a dependency) is not available. In order to run rcov, you must: sudo gem install spicycode-rcov"
 end
 
 task :default => :test
 
-require 'rdoc/task'
-Rake::RDocTask.new do |rdoc|
-  version = File.exist?('VERSION') ? File.read('VERSION') : ""
+begin
+  require 'rdoc/task'
+  Rake::RDocTask.new do |rdoc|
+    version = File.exist?('VERSION') ? File.read('VERSION') : ""
 
-  rdoc.rdoc_dir = 'rdoc'
-  rdoc.title = "inteltech_sms #{version}"
-  rdoc.rdoc_files.include('README*')
-  rdoc.rdoc_files.include('lib/**/*.rb')
+    rdoc.rdoc_dir = 'rdoc'
+    rdoc.title = "inteltech_sms #{version}"
+    rdoc.rdoc_files.include('README*')
+    rdoc.rdoc_files.include('lib/**/*.rb')
+  end
+rescue LoadError
+  puts "rdoc (or a dependency) not available. Install it with: gem install rdoc"
 end
+
+# vi: sw=2 sm ai:

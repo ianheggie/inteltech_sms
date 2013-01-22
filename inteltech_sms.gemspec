@@ -43,20 +43,20 @@ Gem::Specification.new do |s|
       s.add_development_dependency(%q<rdoc>, ["~> 3.12"])
       s.add_development_dependency(%q<bundler>, ["~> 1.2.3"])
       s.add_development_dependency(%q<jeweler>, ["~> 1.8.4"])
-      s.add_development_dependency(%q<rcov>, [">= 0"])
+      s.add_development_dependency(%q<travis-lint>, [">= 0"])
       s.add_development_dependency(%q<shoulda-context>, [">= 0"])
     else
       s.add_dependency(%q<rdoc>, ["~> 3.12"])
       s.add_dependency(%q<bundler>, ["~> 1.2.3"])
       s.add_dependency(%q<jeweler>, ["~> 1.8.4"])
-      s.add_dependency(%q<rcov>, [">= 0"])
+      s.add_dependency(%q<travis-lint>, [">= 0"])
       s.add_dependency(%q<shoulda-context>, [">= 0"])
     end
   else
     s.add_dependency(%q<rdoc>, ["~> 3.12"])
     s.add_dependency(%q<bundler>, ["~> 1.2.3"])
     s.add_dependency(%q<jeweler>, ["~> 1.8.4"])
-    s.add_dependency(%q<rcov>, [">= 0"])
+    s.add_dependency(%q<travis-lint>, [">= 0"])
     s.add_dependency(%q<shoulda-context>, [">= 0"])
   end
 end

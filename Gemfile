@@ -9,8 +9,11 @@ group :development do
   gem "rdoc", "~> 3.12"
   gem "bundler", "~> 1.2.3"
   gem "jeweler", "~> 1.8.4"
-  gem "rcov", ">= 0"
-  gem 'shoulda-context', '>= 0'
   gem "travis-lint", ">= 0"
+  gem 'shoulda-context', '>= 0'
 end
 
+group :test do
+  gem "rcov", ">= 0", :platforms => :ruby_18
+  gem "simplecov", ">= 0", :require => false, :platforms => :ruby_19
+end
