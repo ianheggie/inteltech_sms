@@ -17,8 +17,8 @@ Jeweler::Tasks.new do |gem|
   gem.name = "inteltech_sms"
   gem.homepage = "http://github.com/ianheggie/inteltech_sms"
   gem.license = "MIT"
-  gem.summary = %Q{TODO: one-line summary of your gem}
-  gem.description = %Q{TODO: longer description of your gem}
+  gem.summary = %Q{Ruby API to send SMS via inteltech.com.au}
+  gem.description = %Q{Ruby gem that provides an InteltechSms class to check credit and send SMS text messages to single or multiple recipients}
   gem.email = "ian@heggie.biz"
   gem.authors = ["Ian Heggie"]
   # dependencies defined in Gemfile

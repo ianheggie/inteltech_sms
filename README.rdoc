@@ -1,6 +1,6 @@
 = inteltech_sms
 
-Description goes here.
+InteltechSms is a ruby gem that provides an InteltechSms class to check credit and send SMS text messages to single or multiple recipients
 
 == Contributing to inteltech_sms
  
@@ -12,8 +12,59 @@ Description goes here.
 * Make sure to add tests for it. This is important so I don't break it in a future version unintentionally.
 * Please try not to mess with the Rakefile, version, or history. If you want to have your own version, or is otherwise necessary, that is fine, but please isolate to its own commit so I can cherry-pick around it.
 
-== Copyright
+== Installation
 
-Copyright (c) 2013 Ian Heggie. See LICENSE.txt for
-further details.
+As a Plugin (eg rails 2.3.x)
+
+    % cd vendor/plugins
+    % git clone git://github.com/ianheggie/inteltech_sms.git
+
+As a Gem from gemcutter
+
+    % gem install inteltech_sms    
+    # Add the following line to Gemfile
+    gem "inteltech_sms"
+
+== Usage
+
+You will require an account with inteltech.com.au for the username and secret key. New accounts come with some free credits.
+
+Note: Inteltech's gateway assumes numbers not in international format (ie starting with a plus sign) are australian numbers.
+
+Example ruby code:
+
+    require 'inteltech_sms'
+
+    username = ENV['SMS_USERNAME'] || abort("Missing SMS_USERNAME env variable")
+    secure_key = ENV['SMS_KEY'] || abort("Missing SMS_KEY env variable")
+
+    test_sms = '0411111111'
+    test_sms2 = '+8611111111111'
+    landline_sms = '0862252608' # Inteltech's landline number
+
+    gateway = Inteltech.new(username, secure_key)
+
+    credit = gateway.get_credit.inspect
+
+    puts "You have #{credit} Credit left"
+
+    begin
+      res = gateway.send_sms(test_sms,'Test from Ruby')
+      puts "send_sms to #{res.sms} was successfull."
+    rescue ex => InteltechSms::Error
+      puts "send_sms to #{res.sms} failed. Gateway response #{ex.response.class} with code #{ex.response.response_code}."
+    end
+
+    res2 = gateway.send_multiple_sms([test_sms, test_sms2, landline_sms],'Test from Ruby (expecting first two to pass and last to fail)')
+
+    puts "send_multiple_sms (sending to mobiles should work, sending to a landline should fail):"
+    puts res2.collect {|r| "sms to #{r.sms} #{r.success? ? 'was successfull' : "failed (#{r.class} with code #{r.response_code})"}."}.join("\n")
+
+    exit 0
+
+
+    == Copyright
+
+    Copyright (c) 2013 Ian Heggie. See LICENSE.txt for
+    further details.
 
