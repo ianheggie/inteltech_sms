@@ -68,3 +68,11 @@ Travis CI testing result: {<img src="https://travis-ci.org/ianheggie/inteltech_s
 
 Copyright (c) 2013 Ian Heggie. See LICENSE.txt for further details.
 
+=== Main Contributors
+
+* Ian Heggie - Developer - Heggie Enterprises Pty Ltd - Contributed development of tests and packaging as gem
+* Timelapse Pty Ltd (timelapse.com.au) - Paid for development of lib/inteltech_sms.rb and released code for public use
+
+=== Other/Ongoing Contributors
+* Intelligent Technologies  - Contributing an hour and 5% commission to development costs
+
