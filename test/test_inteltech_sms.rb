@@ -80,7 +80,7 @@ class TestInteltechSms < Test::Unit::TestCase
 
   context "with blank username" do
     setup do
-      @bad_gateway = InteltechSms.new('', @@secure_key)
+      @bad_gateway = InteltechSms.new('', SECURE_KEY_WITHOUT_CREDIT)
     end
 
     should "raise an Unauthorized Error exception when get_credit is called" do
@@ -112,30 +112,32 @@ class TestInteltechSms < Test::Unit::TestCase
   # --------------------------------------------------
   # Code 2015 The destination mobile number is invalid.
 
-  context "with a bad sms number" do
-    setup do
-      @good_gateway = InteltechSms.new(@@username, @@secure_key)
-    end
-
-    should "raise a BadRequest Error exception when send_sms is called" do
-      ex = assert_raises InteltechSms::Error do
-        @good_gateway.send_sms BAD_SMS, 'test'
+  if defined? @@username
+    context "with a bad sms number" do
+      setup do
+        @good_gateway = InteltechSms.new(@@username, @@secure_key)
       end
-      assert_equal InteltechSms::BadRequest.new(BAD_SMS, "2015"), ex.response
-    end
 
-    should "return an array with BadRequest responses when send_multiple_sms is called with some bad numbers" do
-      @res = @good_gateway.send_multiple_sms [BAD_SMS, TEST_SMS, LANDLINE_SMS], 'Test from Ruby'
-      assert_kind_of Array, @res
-      assert_equal 3, @res.length, "send_multiple_sms returns results for each sms sent"
-      assert_kind_of InteltechSms::BadRequest, @res[0], "send_multiple_sms returns BadRequest for 1st element"
-      assert_equal InteltechSms::BadRequest.new(BAD_SMS, "2015"), @res[0]
-      assert_kind_of InteltechSms::Success, @res[1], "send_multiple_sms returns Success for 2nd element"
-      assert_equal InteltechSms::Success.new(TEST_SMS, "0000"), @res[1]
-      assert_kind_of InteltechSms::BadRequest, @res[2], "send_multiple_sms returns BadRequest for 2nd element"
-      assert_equal InteltechSms::BadRequest.new(LANDLINE_SMS, "2015"), @res[2]
-    end
+      should "raise a BadRequest Error exception when send_sms is called" do
+        ex = assert_raises InteltechSms::Error do
+          @good_gateway.send_sms BAD_SMS, 'test'
+        end
+        assert_equal InteltechSms::BadRequest.new(BAD_SMS, "2015"), ex.response
+      end
 
+      should "return an array with BadRequest responses when send_multiple_sms is called with some bad numbers" do
+        @res = @good_gateway.send_multiple_sms [BAD_SMS, TEST_SMS, LANDLINE_SMS], 'Test from Ruby'
+        assert_kind_of Array, @res
+        assert_equal 3, @res.length, "send_multiple_sms returns results for each sms sent"
+        assert_kind_of InteltechSms::BadRequest, @res[0], "send_multiple_sms returns BadRequest for 1st element"
+        assert_equal InteltechSms::BadRequest.new(BAD_SMS, "2015"), @res[0]
+        assert_kind_of InteltechSms::Success, @res[1], "send_multiple_sms returns Success for 2nd element"
+        assert_equal InteltechSms::Success.new(TEST_SMS, "0000"), @res[1]
+        assert_kind_of InteltechSms::BadRequest, @res[2], "send_multiple_sms returns BadRequest for 2nd element"
+        assert_equal InteltechSms::BadRequest.new(LANDLINE_SMS, "2015"), @res[2]
+      end
+
+    end
   end
 
   # --------------------------------------------------
@@ -174,7 +176,7 @@ class TestInteltechSms < Test::Unit::TestCase
 
   context "With an incorrect secure_key" do
     setup do
-      @bad_gateway = InteltechSms.new(@@username, BAD_SECURE_KEY)
+      @bad_gateway = InteltechSms.new(USERNAME_WITHOUT_CREDIT, BAD_SECURE_KEY)
     end
 
     should "raise an Unauthorized Error exception when get_credit is called" do
@@ -205,7 +207,7 @@ class TestInteltechSms < Test::Unit::TestCase
 
   context "with blank secure_key" do
     setup do
-      @bad_gateway = InteltechSms.new(@@username, '')
+      @bad_gateway = InteltechSms.new(USERNAME_WITHOUT_CREDIT, '')
     end
 
     should "raise an Unauthorized Error exception when get_credit is called" do
