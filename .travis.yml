@@ -11,3 +11,7 @@ before_install:
   - gem --version
   - gem install bundler
   - bundle --version
+before_script:
+  - bundle exec rake install
+env:
+  - TEST_GEM=true

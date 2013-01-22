@@ -10,8 +10,11 @@ end
 require 'test/unit'
 require 'shoulda-context'
 
-$LOAD_PATH.unshift(File.join(File.dirname(__FILE__), '..', 'lib'))
-$LOAD_PATH.unshift(File.dirname(__FILE__))
+unless ENV['TEST_GEM']
+  $LOAD_PATH.unshift(File.join(File.dirname(__FILE__), '..', 'lib'))
+end
+#$LOAD_PATH.unshift(File.dirname(__FILE__))
+
 require 'inteltech_sms'
 
 class Test::Unit::TestCase
