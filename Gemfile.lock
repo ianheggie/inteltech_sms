@@ -2,6 +2,7 @@ GEM
   remote: http://rubygems.org/
   specs:
     git (1.2.5)
+    hashr (0.0.22)
     jeweler (1.8.4)
       bundler (~> 1.0)
       git (>= 1.2.5)
@@ -13,6 +14,8 @@ GEM
     rdoc (3.12)
       json (~> 1.4)
     shoulda-context (1.0.2)
+    travis-lint (1.5.0)
+      hashr (~> 0.0.22)
 
 PLATFORMS
   ruby
@@ -23,3 +26,4 @@ DEPENDENCIES
   rcov
   rdoc (~> 3.12)
   shoulda-context
+  travis-lint

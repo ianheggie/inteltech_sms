@@ -11,5 +11,6 @@ group :development do
   gem "jeweler", "~> 1.8.4"
   gem "rcov", ">= 0"
   gem 'shoulda-context', '>= 0'
+  gem "travis-lint", ">= 0"
 end
 
