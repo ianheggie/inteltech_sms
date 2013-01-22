@@ -60,6 +60,10 @@ Example ruby code:
     puts "send_multiple_sms (sending to mobiles should work, sending to a landline should fail):"
     puts res2.collect {|r| "sms to #{r.sms} #{r.success? ? 'was successfull' : "failed (#{r.class} with code #{r.response_code})"}."}.join("\n")
 
+== Continuous integration tests
+
+Travis CI testing result: {<img src="https://travis-ci.org/ianheggie/inteltech_sms.png" />}[https://travis-ci.org/ianheggie/inteltech_sms]
+
 == Copyright
 
 Copyright (c) 2013 Ian Heggie. See LICENSE.txt for further details.
