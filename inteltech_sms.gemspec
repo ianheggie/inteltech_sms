@@ -18,11 +18,14 @@ Gem::Specification.new do |s|
   ]
   s.files = [
     ".document",
+    ".travis.yml",
     "Gemfile",
+    "Gemfile.lock",
     "LICENSE.txt",
     "README.rdoc",
     "Rakefile",
     "VERSION",
+    "inteltech_sms.gemspec",
     "lib/inteltech_sms.rb",
     "test/helper.rb",
     "test/test_inteltech_sms.rb"
@@ -31,7 +34,7 @@ Gem::Specification.new do |s|
   s.licenses = ["MIT"]
   s.require_paths = ["lib"]
   s.rubygems_version = "1.8.24"
-  s.summary = "Ruby API to send SMS via inteltech.com.au"
+  s.summary = "Ruby Gem to send SMS via inteltech.com.au"
 
   if s.respond_to? :specification_version then
     s.specification_version = 3
