@@ -15,7 +15,7 @@ As a Gem from gemcutter
 
 == Usage
 
-You will require an account with inteltech.com.au for the username and secret key. New accounts come with some free credits.
+You will require an account with http://inteltech.com.au for the username and secret key - They offer a free trial so you can try before buying.
 
 Note: Inteltech's gateway assumes numbers not in international format (ie starting with a plus sign) are australian numbers.
 
@@ -74,5 +74,5 @@ Copyright (c) 2013 Ian Heggie. See LICENSE.txt for further details.
 * Timelapse Pty Ltd (timelapse.com.au) - Paid for development of lib/inteltech_sms.rb and released code for public use
 
 === Other/Ongoing Contributors
-* Intelligent Technologies  - Contributing an hour and 5% commission to development costs
+* Intelligent Technologies (inteltech.com.au) - Contributing an hour and 5% commission to development costs
 
