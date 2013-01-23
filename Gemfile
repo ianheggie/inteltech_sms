@@ -14,6 +14,6 @@ group :development do
 end
 
 group :test do
-  gem "rcov", ">= 0", :platforms => :ruby_18
+  gem "rcov", ">= 0", :platforms => :rmi_18
   gem "simplecov", ">= 0", :require => false, :platforms => :ruby_19
 end
