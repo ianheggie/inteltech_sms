@@ -20,7 +20,11 @@ before_install:
   - bundle --version
 before_script:
   - bundle exec rake install
-env: TEST_GEM=true
+env: 
+  global:
+    - TEST_GEM=true
+    - secure: "C6GEFFtmctIFv5nspnfBG5gLCAI/nyRwJx+6BGuTB+iNeCxshY2Uott1KovC\npfE9qboMmPogtMjy+OSUaGx1i+WtDC1Bgq0CWhBRDGONkwqgxc4iA5So0lCv\nF+jA29Nk2C+vRErYfawXRT3i9hIwahfBrfLsZQG3vmqHGOTXLZk="
+    - secure: "Oxuu+TECcw86za8RKdEgmX3R7S5dmWWkpBuQuVCR51L01a5aZM0SIEVT3rwb\n8UEMcA7wSayA9KWbbtR176ZbgD6jAm7DAWKvrjwxTnGEHV1ReiG83bferWyU\nfXXdkTosbQe1Ny6IxizizeoRQr01nsUB5T/hynDuOUuVUYjT3kM="
 matrix:
   allow_failures:
     - rvm: jruby-head
