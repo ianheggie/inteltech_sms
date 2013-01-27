@@ -28,3 +28,7 @@ matrix:
   allow_failures:
     - rvm: jruby-head
     - rvm: ruby-head
+    - rvm: ree
+  include:
+    - rvm: ree
+      env: TEST_GEM=true
