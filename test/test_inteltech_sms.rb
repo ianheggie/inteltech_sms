@@ -20,6 +20,7 @@ class TestInteltechSms < Test::Unit::TestCase
     puts "Tests for non error conditions are disabled (missing SMS_USERNAME and SMS_KEY values for a valid account)"
   else
     @@username = ENV['SMS_USERNAME']
+    puts "Tests for non error conditions have been enabled"
     @@secure_key = ENV['SMS_KEY']
     if ENV['MOBILE_NUMBER'].to_s.empty?
       puts "If MOBILE_NUMBER is supplied, then a test sms will be sent (using one credit)"
