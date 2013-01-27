@@ -9,6 +9,7 @@ group :development do
   gem "rdoc", "~> 3.12"
   gem "bundler", "~> 1.2.3"
   gem "jeweler", "~> 1.8.4"
+  gem "travis", ">= 0"
   gem "travis-lint", ">= 0"
   gem 'shoulda-context', '>= 0'
 end
