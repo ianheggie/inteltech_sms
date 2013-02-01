@@ -1,34 +1,38 @@
-language: ruby
-notifications:
-  email:
-    on_success: change
+--- 
+notifications: 
+  email: 
     on_failure: always
-rvm:
-  - 1.8.7
-  - 1.9.3
-  - rbx-18mode
-  - rbx-19mode
-  - jruby-18mode
-  - jruby-19mode
-  - jruby-head
-  - ruby-head
-  - ree
-before_install:
-  - gem update --system
-  - gem --version
-  - gem install bundler
-  - bundle --version
-before_script:
-  - bundle exec rake install
+    on_success: change
+matrix: 
+  include: 
+  - env: TEST_GEM=true
+    rvm: ree
+  allow_failures: 
+  - rvm: jruby-head
+  - rvm: ruby-head
+  - rvm: ree
+before_script: 
+- bundle exec rake install
+language: ruby
+before_install: 
+- gem update --system
+- gem --version
+- gem install bundler
+- bundle --version
 env: 
-  global:
-    - TEST_GEM=true
-    - secure: "WJZNlf/qf7Um9UpET0ahxNlzVWtOkr9GFSpFMvBKZ7+JxPD3tBTU04DKBbfF\nZqUXSMRb8HopPqf87cZP7J8LPzgKIUryDzNnQn9sdOR1zkGRlSBBZ+Snmygh\nlY7Sivrl0uSa8Xy6sr5EWKcKXRLEshCT+2B20MLtdAQ5lTIdEqE="
-matrix:
-  allow_failures:
-    - rvm: jruby-head
-    - rvm: ruby-head
-    - rvm: ree
-  include:
-    - rvm: ree
-      env: TEST_GEM=true
+  global: 
+  - TEST_GEM=true
+  - secure: |-
+      WJZNlf/qf7Um9UpET0ahxNlzVWtOkr9GFSpFMvBKZ7+JxPD3tBTU04DKBbfF
+      ZqUXSMRb8HopPqf87cZP7J8LPzgKIUryDzNnQn9sdOR1zkGRlSBBZ+Snmygh
+      lY7Sivrl0uSa8Xy6sr5EWKcKXRLEshCT+2B20MLtdAQ5lTIdEqE=
+rvm: 
+- 1.8.7
+- 1.9.3
+- rbx-18mode
+- rbx-19mode
+- jruby-18mode
+- jruby-19mode
+- jruby-head
+- ruby-head
+- ree
