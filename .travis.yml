@@ -4,9 +4,6 @@ notifications:
     on_failure: always
     on_success: change
 matrix: 
-  include: 
-  - env: TEST_GEM=true
-    rvm: ree
   allow_failures: 
   - rvm: jruby-head
   - rvm: ruby-head
@@ -32,4 +29,3 @@ rvm:
 - jruby-19mode
 - jruby-head
 - ruby-head
-#- ree
