@@ -29,3 +29,4 @@ rvm:
 - jruby-19mode
 - jruby-head
 - ruby-head
+- ree
