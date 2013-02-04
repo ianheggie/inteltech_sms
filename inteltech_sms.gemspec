@@ -5,11 +5,11 @@
 
 Gem::Specification.new do |s|
   s.name = "inteltech_sms"
-  s.version = "0.1.2"
+  s.version = "0.1.3"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Ian Heggie"]
-  s.date = "2013-01-22"
+  s.date = "2013-02-04"
   s.description = "Ruby gem that provides an InteltechSms class to check credit and send SMS text messages to single or multiple recipients"
   s.email = "ian@heggie.biz"
   s.extra_rdoc_files = [
@@ -18,6 +18,8 @@ Gem::Specification.new do |s|
   ]
   s.files = [
     ".document",
+    ".rbenv-gemsets",
+    ".ruby-version",
     ".travis.yml",
     "Gemfile",
     "Gemfile.lock",
@@ -33,7 +35,7 @@ Gem::Specification.new do |s|
   s.homepage = "http://github.com/ianheggie/inteltech_sms"
   s.licenses = ["MIT"]
   s.require_paths = ["lib"]
-  s.rubygems_version = "1.8.24"
+  s.rubygems_version = "1.8.25"
   s.summary = "Ruby Gem to send SMS via inteltech.com.au"
 
   if s.respond_to? :specification_version then
@@ -43,12 +45,14 @@ Gem::Specification.new do |s|
       s.add_development_dependency(%q<rdoc>, ["~> 3.12"])
       s.add_development_dependency(%q<bundler>, ["~> 1.2.3"])
       s.add_development_dependency(%q<jeweler>, ["~> 1.8.4"])
+      s.add_development_dependency(%q<travis>, [">= 0"])
       s.add_development_dependency(%q<travis-lint>, [">= 0"])
       s.add_development_dependency(%q<shoulda-context>, [">= 0"])
     else
       s.add_dependency(%q<rdoc>, ["~> 3.12"])
       s.add_dependency(%q<bundler>, ["~> 1.2.3"])
       s.add_dependency(%q<jeweler>, ["~> 1.8.4"])
+      s.add_dependency(%q<travis>, [">= 0"])
       s.add_dependency(%q<travis-lint>, [">= 0"])
       s.add_dependency(%q<shoulda-context>, [">= 0"])
     end
@@ -56,6 +60,7 @@ Gem::Specification.new do |s|
     s.add_dependency(%q<rdoc>, ["~> 3.12"])
     s.add_dependency(%q<bundler>, ["~> 1.2.3"])
     s.add_dependency(%q<jeweler>, ["~> 1.8.4"])
+    s.add_dependency(%q<travis>, [">= 0"])
     s.add_dependency(%q<travis-lint>, [">= 0"])
     s.add_dependency(%q<shoulda-context>, [">= 0"])
   end
