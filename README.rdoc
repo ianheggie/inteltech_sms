@@ -50,6 +50,26 @@ Example ruby code:
     puts "send_multiple_sms (sending to mobiles should work, sending to a landline should fail):"
     puts res2.collect {|r| "sms to #{r.sms} #{r.success? ? 'was successfull' : "failed (#{r.class} with code #{r.response_code})"}."}.join("\n")
 
+=== Optional arguments
+
+There are a few optional parameters that the gateway will accept.
+
+• senderid – 15 character custom sender ID which can be a mobile number or a alphanumeric string.
+e.g. send message from MYCOMPANY. (Additional cost of 0.5 credits/message applies).
+Do not use spaces. If left blank, a random mobile number will be used.
+
+• schedule – Allows you to schedule a message delivery. Must be in unix format. e.g. 1348742950 (Use Time.now.utc.to_i to get the current time)
+
+These are passed to the send_sms and send_multiple_sms methods via an optional hash argument:
+
+    # To schedule the sms in 12 minutes time ...
+
+    res = gateway.send_sms(test_sms,'Test from Ruby', :schedule => Time.now.utc.to_i + (12 * 60))
+
+    # To schedule the sms and supply a custom sender id
+
+    res2 = gateway.send_multiple_sms([test_sms, test_sms2, landline_sms],'Test from Ruby to multiple numbers', :senderid => 'MYCOMPANY', :schedule => 1348742950)
+
 == Continuous integration tests
 
 Travis CI testing result: {<img src="https://travis-ci.org/ianheggie/inteltech_sms.png" />}[https://travis-ci.org/ianheggie/inteltech_sms]
@@ -74,5 +94,6 @@ Copyright (c) 2013 Ian Heggie. See LICENSE.txt for further details.
 * Timelapse Pty Ltd (timelapse.com.au) - Paid for development of lib/inteltech_sms.rb and released code for public use
 
 === Other/Ongoing Contributors
+
 * Intelligent Technologies (inteltech.com.au) - Contributing an hour and 5% commission to development costs
 
