@@ -7,7 +7,6 @@ matrix:
   allow_failures: 
   - rvm: jruby-head
   - rvm: ruby-head
-  - rvm: ree
 before_script: 
 - bundle exec rake install
 language: ruby
