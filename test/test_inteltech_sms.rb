@@ -61,18 +61,23 @@ class TestInteltechSms < Test::Unit::TestCase
     end
 
     context "#send_multiple_sms" do
-      setup do
+      should "return an array with a response for each sms sent" do
         @good_gateway = InteltechSms.new(@@username, @@secure_key)
         @res = @good_gateway.send_multiple_sms [TEST_SMS, TEST_SMS2],'Test from Ruby'
-      end
-
-      should "return an array with a response for each sms sent" do
         assert_kind_of Array, @res
         assert_equal 2, @res.length
         assert_equal InteltechSms::Success.new(TEST_SMS, "0000"), @res[0], "send_multiple_sms returns success for 1st element"
         assert_equal InteltechSms::Success.new(TEST_SMS2, "0000"), @res[1], "send_multiple_sms returns success for 2nd element"
       end 
 
+      should "return an array with a response for each sms sent where a comma seperated string is provided" do
+        @good_gateway = InteltechSms.new(@@username, @@secure_key)
+        @res = @good_gateway.send_multiple_sms [TEST_SMS2, TEST_SMS].join(','),'Test from Ruby2'
+        assert_kind_of Array, @res
+        assert_equal 2, @res.length
+        assert_equal InteltechSms::Success.new(TEST_SMS2, "0000"), @res[0], "send_multiple_sms returns success for 1st element"
+        assert_equal InteltechSms::Success.new(TEST_SMS, "0000"), @res[1], "send_multiple_sms returns success for 2nd element"
+      end 
    end
   end
 
