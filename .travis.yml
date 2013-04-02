@@ -3,29 +3,48 @@ notifications:
   email: 
     on_failure: always
     on_success: change
-matrix: 
-  allow_failures: 
-  - rvm: jruby-head
-  - rvm: ruby-head
-before_script: 
-- bundle exec rake install
-language: ruby
+
 before_install: 
-- gem update --system
-- gem --version
-- gem install bundler
-- bundle --version
+ - gem update --system $RUBYGEMS_VERSION
+ - gem --version
+ - gem install bundler
+ - bundle --version
+
+before_script: 
+ - bundle exec rake install
+
+language: ruby
+
 env: 
   global: 
   - TEST_GEM=true
+  - RUBYGEMS_VERSION=
   - secure: "D6Sd+bPmNb3P+98W1arc+SbaFV8oC+0NhnZX9fcoIqCHfnVpt6Vd54idUxJv\nhhFUFmySl17zCX/HRaVoscpCYPcJWRWIeXSD4qrHlObaTx+BDKlMAlWl/Y7d\nQy9c4g+QbDhz94l3DeNW7VbCYz/YYyRPBCcZK+K3H1KPmMtngRU="
+
 rvm: 
-- 1.8.7
-- 1.9.3
-- rbx-18mode
-- rbx-19mode
-- jruby-18mode
-- jruby-19mode
-- jruby-head
-- ruby-head
-- ree
+  - 1.8.7
+  - 1.9.3
+  - 2.0.0
+  - rbx-19mode
+  - jruby-19mode
+  - ree
+
+matrix: 
+  exclude:
+    - rvm: 1.8.7
+      env: RUBYGEMS_VERSION=
+    - rvm: jruby-19mode
+      env: RUBYGEMS_VERSION=
+  include:
+    - rvm: 1.8.7
+      env: RUBYGEMS_VERSION=1.8.25
+    - rvm: 1.9.3
+      env: RUBYGEMS_VERSION=1.8.25
+    - rvm: 2.0.0
+      env: RUBYGEMS_VERSION=1.8.25
+    - rvm: jruby-19mode
+      env: RUBYGEMS_VERSION=1.8.25
+    - rvm: rbx-19mode
+      env: RUBYGEMS_VERSION=1.8.25
+    - rvm: ree
+      env: RUBYGEMS_VERSION=1.8.25
