@@ -17,6 +17,10 @@ pkg
 
 # Don't overwite local rbenv settings
 .rbenv-version
+.ruby-version
+
+# Dont lock down gems
+Gemfile.lock
 
 # Temp files
 ,*
