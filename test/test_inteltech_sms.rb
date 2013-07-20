@@ -12,7 +12,8 @@ class TestInteltechSms < Test::Unit::TestCase
 
   TEST_SMS = '0411111111'
   TEST_SMS2 = '+8611111111111'
-  BAD_SMS = '049999999'
+  # http://www.acma.gov.au/Citizen/Consumer-info/All-about-numbers/Special-numbers/fictitious-numbers-for-radio-film-and-television-i-acma
+  BAD_SMS = '0491570156'
 
   LANDLINE_SMS = '0862252608'  # InteltechSms's landline
 
@@ -52,8 +53,9 @@ class TestInteltechSms < Test::Unit::TestCase
       end
 
       should "reject an indentical message sent shortly after" do
-        expected = InteltechSms::Success.new(TEST_SMS, "2016")
-        assert_equal expected, @good_gateway.send_sms(TEST_SMS,'Test from Ruby - send a single test sms via send_sms')
+        expected = InteltechSms::BadRequest.new(TEST_SMS, "2016")
+        @good_gateway.send_sms(TEST_SMS,'Test from Ruby - send two copies of single test sms via send_sms')
+        assert_equal expected, @good_gateway.send_sms(TEST_SMS,'Test from Ruby - send two copies of single test sms via send_sms')
       end
 
       if defined? @@mobile_number
