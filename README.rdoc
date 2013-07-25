@@ -88,6 +88,10 @@ Travis CI testing result: {<img src="https://travis-ci.org/ianheggie/inteltech_s
 
 Copyright (c) 2013 Ian Heggie. See LICENSE.txt for further details.
 
+=== Known issues
+
+* The SMS Gateway no longer responds with 2015 Bad number when a mobile number is not connected. The gateway accepts the request and charges for it, then posts the failure in the history log. (Tested using numbers reserved for fictitious use in films and books etc - tests are now disabled)
+
 === Main Contributors
 
 * Ian Heggie - Developer - Heggie Enterprises Pty Ltd - Contributed development of tests and packaging as gem

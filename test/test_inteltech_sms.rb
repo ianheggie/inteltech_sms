@@ -55,7 +55,10 @@ class TestInteltechSms < Test::Unit::TestCase
       should "reject an indentical message sent shortly after" do
         expected = InteltechSms::BadRequest.new(TEST_SMS, "2016")
         @good_gateway.send_sms(TEST_SMS,'Test from Ruby - send two copies of single test sms via send_sms')
-        assert_equal expected, @good_gateway.send_sms(TEST_SMS,'Test from Ruby - send two copies of single test sms via send_sms')
+        ex = assert_raises InteltechSms::Failure do
+          @good_gateway.send_sms(TEST_SMS,'Test from Ruby - send two copies of single test sms via send_sms')
+        end
+        assert_equal InteltechSms::Failure.new('', "2006"), ex.response
       end
 
       if defined? @@mobile_number
@@ -125,33 +128,33 @@ class TestInteltechSms < Test::Unit::TestCase
   # --------------------------------------------------
   # Code 2015 The destination mobile number is invalid.
 
-  if defined? @@username
-    context "with a bad sms number" do
-      setup do
-        @good_gateway = InteltechSms.new(@@username, @@secure_key)
-      end
-
-      should "raise a BadRequest Error exception when send_sms is called" do
-        ex = assert_raises InteltechSms::Error do
-          @good_gateway.send_sms BAD_SMS, 'Test from ruby - bad sms number'
-        end
-        assert_equal InteltechSms::BadRequest.new(BAD_SMS, "2015"), ex.response
-      end
-
-      should "return an array with BadRequest responses when send_multiple_sms is called with some bad numbers" do
-        @res = @good_gateway.send_multiple_sms [BAD_SMS, TEST_SMS, LANDLINE_SMS], 'Test from Ruby - return an array with BadRequest responses when send_multiple_sms is called with some bad numbers'
-        assert_kind_of Array, @res
-        assert_equal 3, @res.length, "send_multiple_sms returns results for each sms sent"
-        assert_kind_of InteltechSms::BadRequest, @res[0], "send_multiple_sms returns BadRequest for 1st element"
-        assert_equal InteltechSms::BadRequest.new(BAD_SMS, "2015"), @res[0]
-        assert_kind_of InteltechSms::Success, @res[1], "send_multiple_sms returns Success for 2nd element"
-        assert_equal InteltechSms::Success.new(TEST_SMS, "0000"), @res[1]
-        assert_kind_of InteltechSms::BadRequest, @res[2], "send_multiple_sms returns BadRequest for 2nd element"
-        assert_equal InteltechSms::BadRequest.new(LANDLINE_SMS, "2015"), @res[2]
-      end
-
-    end
-  end
+#  if defined? @@username
+#    context "with a bad sms number" do
+#      setup do
+#        @good_gateway = InteltechSms.new(@@username, @@secure_key)
+#      end
+#
+#      should "raise a BadRequest Error exception when send_sms is called" do
+#        ex = assert_raises InteltechSms::Error do
+#          @good_gateway.send_sms BAD_SMS, 'Test from ruby - bad sms number'
+#        end
+#        assert_equal InteltechSms::BadRequest.new(BAD_SMS, "2015"), ex.response
+#      end
+#
+#      should "return an array with BadRequest responses when send_multiple_sms is called with some bad numbers" do
+#        @res = @good_gateway.send_multiple_sms [BAD_SMS, TEST_SMS, LANDLINE_SMS], 'Test from Ruby - return an array with BadRequest responses when send_multiple_sms is called with some bad numbers'
+#        assert_kind_of Array, @res
+#        assert_equal 3, @res.length, "send_multiple_sms returns results for each sms sent"
+#        assert_kind_of InteltechSms::BadRequest, @res[0], "send_multiple_sms returns BadRequest for 1st element"
+#        assert_equal InteltechSms::BadRequest.new(BAD_SMS, "2015"), @res[0]
+#        assert_kind_of InteltechSms::Success, @res[1], "send_multiple_sms returns Success for 2nd element"
+#        assert_equal InteltechSms::Success.new(TEST_SMS, "0000"), @res[1]
+#        assert_kind_of InteltechSms::BadRequest, @res[2], "send_multiple_sms returns BadRequest for 2nd element"
+#        assert_equal InteltechSms::BadRequest.new(LANDLINE_SMS, "2015"), @res[2]
+#      end
+#
+#    end
+#  end
 
   # --------------------------------------------------
   # Code 2018 You have reached the end of your message credits. You will need to purchase more messages.
