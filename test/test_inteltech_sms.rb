@@ -1,4 +1,5 @@
 require 'helper'
+require 'net/http'
 
 class TestInteltechSms < Test::Unit::TestCase
 
@@ -16,6 +17,10 @@ class TestInteltechSms < Test::Unit::TestCase
   BAD_SMS = '0491570156'
 
   LANDLINE_SMS = '0862252608'  # InteltechSms's landline
+
+  UNIQUE_STRING = ' test#' << ENV['TRAVIS_JOB_NUMBER'].to_s << '-' << (0..2).to_a.map{|a| rand(36**4).to_s(36)}.join('.')
+  
+  puts "Tests will contain text ending in #{UNIQUE_STRING}"
 
   if ENV['SMS_USERNAME'].to_s.empty? or ENV['SMS_KEY'].to_s.empty?
     puts "Tests for non error conditions are disabled (missing SMS_USERNAME and SMS_KEY values for a valid account)"
@@ -49,7 +54,7 @@ class TestInteltechSms < Test::Unit::TestCase
 
       should "send a single test sms via send_sms" do
         expected = InteltechSms::Success.new(TEST_SMS, "0000")
-        assert_equal expected, @good_gateway.send_sms(TEST_SMS,'Test from Ruby - send a single test sms via send_sms')
+        assert_equal expected, @good_gateway.send_sms(TEST_SMS,'Test from Ruby - send a single test sms via send_sms' << UNIQUE_STRING)
       end
 
       if defined? @@mobile_number
@@ -64,7 +69,7 @@ class TestInteltechSms < Test::Unit::TestCase
     context "#send_multiple_sms" do
       should "return an array with a response for each sms sent" do
         @good_gateway = InteltechSms.new(@@username, @@secure_key)
-        @res = @good_gateway.send_multiple_sms [TEST_SMS, TEST_SMS2],'Test from Ruby - return an array with a response for each sms sent'
+        @res = @good_gateway.send_multiple_sms [TEST_SMS, TEST_SMS2],'Test from Ruby - return an array with a response for each sms sent' << UNIQUE_STRING
         assert_kind_of Array, @res
         assert_equal 2, @res.length
         assert_equal InteltechSms::Success.new(TEST_SMS, "0000"), @res[0], "send_multiple_sms returns success for 1st element"
@@ -73,7 +78,7 @@ class TestInteltechSms < Test::Unit::TestCase
 
       should "return an array with a response for each sms sent where a comma seperated string is provided" do
         @good_gateway = InteltechSms.new(@@username, @@secure_key)
-        @res = @good_gateway.send_multiple_sms [TEST_SMS2, TEST_SMS].join(','),'Test from Ruby - return an array with a response for each sms sent where a comma seperated string is provided'
+        @res = @good_gateway.send_multiple_sms [TEST_SMS2, TEST_SMS].join(','),'Test from Ruby - return an array with a response for each sms sent where a comma seperated string is provided' << UNIQUE_STRING
         assert_kind_of Array, @res
         assert_equal 2, @res.length
         assert_equal InteltechSms::Success.new(TEST_SMS2, "0000"), @res[0], "send_multiple_sms returns success for 1st element"
@@ -99,13 +104,13 @@ class TestInteltechSms < Test::Unit::TestCase
 
     should "raise an Unauthorized Error exception when send_sms is called" do
       ex = assert_raises InteltechSms::Error do
-        @bad_gateway.send_sms TEST_SMS, 'Tests from ruby - with blank username raise an Unauthorized Error exception when send_sms is called'
+        @bad_gateway.send_sms TEST_SMS, 'Tests from ruby - with blank username raise an Unauthorized Error exception when send_sms is called' << UNIQUE_STRING
       end
       assert_equal InteltechSms::Unauthorized.new(TEST_SMS, "2006"), ex.response
     end
 
     should "return an array Unauthorized responses when send_multiple_sms is called" do
-      @res = @bad_gateway.send_multiple_sms [TEST_SMS, TEST_SMS2], 'Test from Ruby - with blank username return an array Unauthorized responses when send_multiple_sms is called'
+      @res = @bad_gateway.send_multiple_sms [TEST_SMS, TEST_SMS2], 'Test from Ruby - with blank username return an array Unauthorized responses when send_multiple_sms is called' << UNIQUE_STRING
       assert_kind_of Array, @res
       assert_equal 2, @res.length, "send_multiple_sms returns results for each sms sent"
       assert_kind_of InteltechSms::Unauthorized, @res[0], "send_multiple_sms returns Unauthorized for 1st element"
@@ -127,13 +132,13 @@ class TestInteltechSms < Test::Unit::TestCase
 #
 #      should "raise a BadRequest Error exception when send_sms is called" do
 #        ex = assert_raises InteltechSms::Error do
-#          @good_gateway.send_sms BAD_SMS, 'Test from ruby - bad sms number'
+#          @good_gateway.send_sms BAD_SMS, 'Test from ruby - bad sms number' << UNIQUE_STRING
 #        end
 #        assert_equal InteltechSms::BadRequest.new(BAD_SMS, "2015"), ex.response
 #      end
 #
 #      should "return an array with BadRequest responses when send_multiple_sms is called with some bad numbers" do
-#        @res = @good_gateway.send_multiple_sms [BAD_SMS, TEST_SMS, LANDLINE_SMS], 'Test from Ruby - return an array with BadRequest responses when send_multiple_sms is called with some bad numbers'
+#        @res = @good_gateway.send_multiple_sms [BAD_SMS, TEST_SMS, LANDLINE_SMS], 'Test from Ruby - return an array with BadRequest responses when send_multiple_sms is called with some bad numbers' << UNIQUE_STRING
 #        assert_kind_of Array, @res
 #        assert_equal 3, @res.length, "send_multiple_sms returns results for each sms sent"
 #        assert_kind_of InteltechSms::BadRequest, @res[0], "send_multiple_sms returns BadRequest for 1st element"
@@ -160,9 +165,9 @@ class TestInteltechSms < Test::Unit::TestCase
 
       should "reject the second of a pair of indentical messages" do
         expected = InteltechSms::BadRequest.new(TEST_SMS, "2016")
-        @good_gateway.send_sms(TEST_SMS,'Test from Ruby - send two copies of single test sms via send_sms')
+        @good_gateway.send_sms(TEST_SMS,'Test from Ruby - send two copies of single test sms via send_sms' << UNIQUE_STRING)
         ex = assert_raises InteltechSms::Error do
-          @good_gateway.send_sms(TEST_SMS,'Test from Ruby - send two copies of single test sms via send_sms')
+          @good_gateway.send_sms(TEST_SMS,'Test from Ruby - send two copies of single test sms via send_sms' << UNIQUE_STRING)
         end
         assert_equal InteltechSms::Duplicate.new('', "2006"), ex.response
       end
@@ -184,13 +189,13 @@ class TestInteltechSms < Test::Unit::TestCase
 
     should "raise an NoCredit Error exception when send_sms is called" do
       ex = assert_raises InteltechSms::Error do
-        @nocredit_gateway.send_sms TEST_SMS, 'Test from ruby - no credit on send_sms'
+        @nocredit_gateway.send_sms TEST_SMS, 'Test from ruby - no credit on send_sms' << UNIQUE_STRING
       end
       assert_equal InteltechSms::NoCredit.new(TEST_SMS, "2018"), ex.response
     end
 
     should "return an array NoCredit responses when send_multiple_sms is called" do
-      @res = @nocredit_gateway.send_multiple_sms [TEST_SMS, TEST_SMS2], 'Test from Ruby - return an array NoCredit responses when send_multiple_sms is called'
+      @res = @nocredit_gateway.send_multiple_sms [TEST_SMS, TEST_SMS2], 'Test from Ruby - return an array NoCredit responses when send_multiple_sms is called' << UNIQUE_STRING
       assert_kind_of Array, @res
       assert_equal 2, @res.length, "send_multiple_sms returns results for each sms sent"
       assert_kind_of InteltechSms::NoCredit, @res[0], "send_multiple_sms returns NoCredit for 1st element"
@@ -218,13 +223,13 @@ class TestInteltechSms < Test::Unit::TestCase
 
     should "raise an Unauthorized Error exception when send_sms is called" do
       ex = assert_raises InteltechSms::Error do
-        @bad_gateway.send_sms TEST_SMS, 'Test from ruby - incorrect secure key send_sms call'
+        @bad_gateway.send_sms TEST_SMS, 'Test from ruby - incorrect secure key send_sms call' << UNIQUE_STRING
       end
       assert_equal InteltechSms::Unauthorized.new(TEST_SMS, "2022"), ex.response
     end
 
     should "return an array Unauthorized responses when send_multiple_sms is called" do
-      @res = @bad_gateway.send_multiple_sms [TEST_SMS, TEST_SMS2], 'Test from Ruby - with incorrect key return an array Unauthorized responses when send_multiple_sms is called'
+      @res = @bad_gateway.send_multiple_sms [TEST_SMS, TEST_SMS2], 'Test from Ruby - with incorrect key return an array Unauthorized responses when send_multiple_sms is called' << UNIQUE_STRING
       assert_kind_of Array, @res
       assert_equal 2, @res.length, "send_multiple_sms returns results for each sms sent"
       assert_kind_of InteltechSms::Unauthorized, @res[0], "send_multiple_sms returns Unauthorized for 1st element"
@@ -249,13 +254,13 @@ class TestInteltechSms < Test::Unit::TestCase
 
     should "raise an Unauthorized Error exception when send_sms is called" do
       ex = assert_raises InteltechSms::Error do
-        @bad_gateway.send_sms TEST_SMS, 'Test from ruby - blank secure key send_sms call'
+        @bad_gateway.send_sms TEST_SMS, 'Test from ruby - blank secure key send_sms call' << UNIQUE_STRING
       end
       assert_equal InteltechSms::Unauthorized.new(TEST_SMS, "2022"), ex.response
     end
 
     should "return an array Unauthorized responses when send_multiple_sms is called" do
-      @res = @bad_gateway.send_multiple_sms [TEST_SMS, TEST_SMS2], 'Test from Ruby - with blank secure key return an array Unauthorized responses when send_multiple_sms is called'
+      @res = @bad_gateway.send_multiple_sms [TEST_SMS, TEST_SMS2], 'Test from Ruby - with blank secure key return an array Unauthorized responses when send_multiple_sms is called' << UNIQUE_STRING
       assert_kind_of Array, @res
       assert_equal 2, @res.length, "send_multiple_sms returns results for each sms sent"
       assert_kind_of InteltechSms::Unauthorized, @res[0], "send_multiple_sms returns Unauthorized for 1st element"
