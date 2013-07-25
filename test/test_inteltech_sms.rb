@@ -169,7 +169,7 @@ class TestInteltechSms < Test::Unit::TestCase
         ex = assert_raises InteltechSms::Error do
           @good_gateway.send_sms(TEST_SMS,'Test from Ruby - send two copies of single test sms via send_sms' << UNIQUE_STRING)
         end
-        assert_equal InteltechSms::Duplicate.new('', "2006"), ex.response
+        assert_equal InteltechSms::Duplicate.new(TEST_SMS, "2016"), ex.response
       end
 
     end
