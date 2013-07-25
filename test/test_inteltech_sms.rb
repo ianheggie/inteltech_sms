@@ -52,15 +52,6 @@ class TestInteltechSms < Test::Unit::TestCase
         assert_equal expected, @good_gateway.send_sms(TEST_SMS,'Test from Ruby - send a single test sms via send_sms')
       end
 
-      should "reject an indentical message sent shortly after" do
-        expected = InteltechSms::BadRequest.new(TEST_SMS, "2016")
-        @good_gateway.send_sms(TEST_SMS,'Test from Ruby - send two copies of single test sms via send_sms')
-        ex = assert_raises InteltechSms::Failure do
-          @good_gateway.send_sms(TEST_SMS,'Test from Ruby - send two copies of single test sms via send_sms')
-        end
-        assert_equal InteltechSms::Failure.new('', "2006"), ex.response
-      end
-
       if defined? @@mobile_number
         should "send a single real sms via send_sms" do
           expected = InteltechSms::Success.new(@@mobile_number, "0000")
@@ -155,6 +146,28 @@ class TestInteltechSms < Test::Unit::TestCase
 #
 #    end
 #  end
+
+  # --------------------------------------------------
+  # Code 2016  Identical message sent to this recipient. Please try again in a few seconds.
+
+  if defined? @@username
+
+    context "with a good username and secure_key" do
+
+      setup do
+        @good_gateway = InteltechSms.new(@@username, @@secure_key)
+      end
+
+      should "reject the second of a pair of indentical messages" do
+        expected = InteltechSms::BadRequest.new(TEST_SMS, "2016")
+        @good_gateway.send_sms(TEST_SMS,'Test from Ruby - send two copies of single test sms via send_sms')
+        ex = assert_raises InteltechSms::Error do
+          @good_gateway.send_sms(TEST_SMS,'Test from Ruby - send two copies of single test sms via send_sms')
+        end
+        assert_equal InteltechSms::Duplicate.new('', "2006"), ex.response
+      end
+
+    end
 
   # --------------------------------------------------
   # Code 2018 You have reached the end of your message credits. You will need to purchase more messages.

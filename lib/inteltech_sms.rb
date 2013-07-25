@@ -28,6 +28,8 @@ class InteltechSms
         Unauthorized.new(sms, response_code)
       when '2015'
         BadRequest.new(sms, response_code)
+      when '2016'
+        Duplicate.new(sms, response_code)
       when '2018'
         NoCredit.new(sms, response_code)
       when '2022'
@@ -68,6 +70,9 @@ class InteltechSms
   end
 
   class NoCredit < Failure
+  end
+
+  class Duplicate < Failure
   end
 
   # class InteltechSms
