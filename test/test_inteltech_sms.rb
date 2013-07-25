@@ -168,6 +168,7 @@ class TestInteltechSms < Test::Unit::TestCase
       end
 
     end
+  end
 
   # --------------------------------------------------
   # Code 2018 You have reached the end of your message credits. You will need to purchase more messages.
