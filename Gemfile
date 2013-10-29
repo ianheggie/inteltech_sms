@@ -12,6 +12,7 @@ group :development do
   gem "travis", ">= 0"
   gem "travis-lint", ">= 0"
   gem 'shoulda-context', '>= 0'
+  gem 'coveralls', :require => false
 end
 
 group :test do

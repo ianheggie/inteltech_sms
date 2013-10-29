@@ -10,6 +10,9 @@ end
 require 'test/unit'
 require 'shoulda-context'
 
+require 'coveralls'
+Coveralls.wear!
+
 unless ENV['TEST_GEM']
   puts "test/helper: Adding ../lib to $LOAD_PATH"
   $LOAD_PATH.unshift(File.join(File.dirname(__FILE__), '..', 'lib'))
