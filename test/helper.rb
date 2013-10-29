@@ -1,4 +1,7 @@
 require 'rubygems'
+require 'coveralls'
+Coveralls.wear!
+
 require 'bundler'
 begin
   Bundler.setup(:default, :development)
@@ -7,11 +10,9 @@ rescue Bundler::BundlerError => e
   $stderr.puts "Run `bundle install` to install missing gems"
   exit e.status_code
 end
+
 require 'test/unit'
 require 'shoulda-context'
-
-require 'coveralls'
-Coveralls.wear!
 
 unless ENV['TEST_GEM']
   puts "test/helper: Adding ../lib to $LOAD_PATH"
