@@ -72,7 +72,8 @@ These are passed to the send_sms and send_multiple_sms methods via an optional h
 
 == Continuous integration tests
 
-Travis CI testing result: {<img src="https://travis-ci.org/ianheggie/inteltech_sms.png" />}[https://travis-ci.org/ianheggie/inteltech_sms]
+* Travis CI testing result: {<img src="https://travis-ci.org/ianheggie/inteltech_sms.png" />}[https://travis-ci.org/ianheggie/inteltech_sms]
+* Code Coverage: {<img src="https://coveralls.io/repos/ianheggie/inteltech_sms/badge.png" alt="Coverage Status" />}[https://coveralls.io/r/ianheggie/inteltech_sms]
 
 == Contributing to inteltech_sms
 
