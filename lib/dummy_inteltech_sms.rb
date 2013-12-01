@@ -8,13 +8,14 @@ require 'inteltech_sms'
 class DummyInteltechSms < InteltechSms 
 
 
-  attr_accessor :credit, :response_code 
+  attr_accessor :credit, :response_code, :log_to_stdout
 
   def initialize(credit, response_code = InteltechSms::SUCCESS_RESPONSE_CODE)
     super('dummy_user', 'a_secret')
     @credit = credit.to_i
     @response_code = response_code
     @last_sms = ''
+    @log_to_stdout = true
   end
 
   def get_credit
@@ -25,6 +26,7 @@ class DummyInteltechSms < InteltechSms
   def send_sms(sms, message, options = { })
     this_response_code = response_code_for_sms(sms)
     @credit -= 1 if this_response_code == InteltechSms::SUCCESS_RESPONSE_CODE
+    puts "WOULD HAVE SENT SMS TO #{sms}: #{message} AND RETURNED STATUS: #{this_response_code}" if @log_to_stdout
     res = InteltechSms::FakeHTTPSuccess.new(this_response_code)
     process_send_sms_response(res, sms)
   end
@@ -32,6 +34,7 @@ class DummyInteltechSms < InteltechSms
   def send_multiple_sms(sms, message, options = { })
     this_response_code = response_code_for_sms(sms)
     sms_array = (sms.is_a?(Array) ? sms : sms.split(','))
+    puts "WOULD HAVE SENT SMS TO #{sms_array.join(', ')}: #{message} AND RETURNED STATUS: #{this_response_code}" if @log_to_stdout
     @credit -= sms_array.size if this_response_code == InteltechSms::SUCCESS_RESPONSE_CODE
 
     ret = [ ]

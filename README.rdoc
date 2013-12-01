@@ -52,9 +52,9 @@ Example ruby code:
 
 === Dummy for testing
 
-A Dummy class is also provided for use with tests. The dummy class will return a response based on the response code given.
-
-You can instantiate an instance of the DummyInteltechSms, passing the initial credit, and optionally the response code
+A Dummy class is also provided for use with tests. The dummy class will return a response based on the response code given. 
+Instantiate an instance of the DummyInteltechSms, passing the initial credit, and optionally the response code.
+Sms messages will be logged to stdout unless log_to_stdout is set to false.
 
 Example ruby code:
 
