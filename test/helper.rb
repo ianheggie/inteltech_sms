@@ -21,6 +21,7 @@ end
 #$LOAD_PATH.unshift(File.dirname(__FILE__))
 
 require 'inteltech_sms'
+require 'dummy_inteltech_sms'
 
 class Test::Unit::TestCase
 end
