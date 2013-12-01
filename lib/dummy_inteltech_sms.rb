@@ -31,7 +31,7 @@ class DummyInteltechSms < InteltechSms
 
   def send_multiple_sms(sms, message, options = { })
     this_response_code = response_code_for_sms(sms)
-    sms_array = (sms.respond_to?(:each) ? sms : sms.split(','))
+    sms_array = (sms.is_a?(Array) ? sms : sms.split(','))
     @credit -= sms_array.size if this_response_code == InteltechSms::SUCCESS_RESPONSE_CODE
 
     ret = [ ]
