@@ -31,10 +31,11 @@ class DummyInteltechSms < InteltechSms
 
   def send_multiple_sms(sms, message, options = { })
     this_response_code = response_code_for_sms(sms)
-    @credit -= sms.split(',').size if this_response_code == InteltechSms::SUCCESS_RESPONSE_CODE
+    sms_array = (sms.respond_to?(:each) ? sms : sms.split(','))
+    @credit -= sms_array.size if this_response_code == InteltechSms::SUCCESS_RESPONSE_CODE
 
     ret = [ ]
-    sms.split(',').each do |this_sms|
+    sms_array.each do |this_sms|
       ret << Response.factory(this_sms.strip, this_response_code)
     end
     ret
