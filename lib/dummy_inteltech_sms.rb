@@ -1,6 +1,8 @@
 
 require 'net/http'
 
+require 'inteltech_sms'
+
 # Dummy Class for testing
 
 class DummyInteltechSms < InteltechSms 
@@ -43,8 +45,12 @@ class DummyInteltechSms < InteltechSms
   def response_code_for_sms(sms)
     ret = @response_code
     if ret == InteltechSms::SUCCESS_RESPONSE_CODE
-      ret = @last_sms == sms ? InteltechSms::DUPLICATE_RESPONSE_CODE : @response_code
-      @last_sms = sms
+      if @credit <= 0 
+        ret = InteltechSms::NO_CREDIT_RESPONSE_CODE
+      else
+        ret = @last_sms == sms ? InteltechSms::DUPLICATE_RESPONSE_CODE : @response_code
+        @last_sms = sms
+      end
     end
     ret
   end
