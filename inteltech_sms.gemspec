@@ -9,7 +9,7 @@ Gem::Specification.new do |s|
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Ian Heggie"]
-  s.date = "2013-10-29"
+  s.date = "2013-12-02"
   s.description = "Ruby gem that provides an InteltechSms class to check credit and send SMS text messages to single or multiple recipients"
   s.email = "ian@heggie.biz"
   s.extra_rdoc_files = [
@@ -28,8 +28,10 @@ Gem::Specification.new do |s|
     "VERSION",
     "inteltech_sms.gemspec",
     "lib/inteltech_sms.rb",
+    "lib/dummy_inteltech_sms.rb",
     "test/helper.rb",
-    "test/test_inteltech_sms.rb"
+    "test/test_inteltech_sms.rb",
+    "test/test_dummy_inteltech_sms.rb"
   ]
   s.homepage = "http://github.com/ianheggie/inteltech_sms"
   s.licenses = ["MIT"]

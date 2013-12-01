@@ -66,3 +66,11 @@ matrix:
       - RUBYGEMS_VERSION=1.8.25
       - TEST_GEM=true
       - secure: "D6Sd+bPmNb3P+98W1arc+SbaFV8oC+0NhnZX9fcoIqCHfnVpt6Vd54idUxJv\nhhFUFmySl17zCX/HRaVoscpCYPcJWRWIeXSD4qrHlObaTx+BDKlMAlWl/Y7d\nQy9c4g+QbDhz94l3DeNW7VbCYz/YYyRPBCcZK+K3H1KPmMtngRU="
+  allow_failures:
+    - rvm: rbx-19mode
+    - rvm: rbx-19mode
+      env:
+      - RUBYGEMS_VERSION=1.8.25
+      - TEST_GEM=true
+      - secure: "D6Sd+bPmNb3P+98W1arc+SbaFV8oC+0NhnZX9fcoIqCHfnVpt6Vd54idUxJv\nhhFUFmySl17zCX/HRaVoscpCYPcJWRWIeXSD4qrHlObaTx+BDKlMAlWl/Y7d\nQy9c4g+QbDhz94l3DeNW7VbCYz/YYyRPBCcZK+K3H1KPmMtngRU="
+
