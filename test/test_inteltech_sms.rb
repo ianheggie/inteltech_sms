@@ -106,17 +106,26 @@ class TestInteltechSms < Test::Unit::TestCase
       ex = assert_raises InteltechSms::Error do
         @bad_gateway.send_sms TEST_SMS, 'Tests from ruby - with blank username raise an Unauthorized Error exception when send_sms is called' << UNIQUE_STRING
       end
-      assert_equal InteltechSms::Unauthorized.new(TEST_SMS, "2006"), ex.response
+      if ex.response.response_code == "2102"   # recent changes produce an internal error
+        assert_equal InteltechSms::Failure.new(TEST_SMS, "2102"), ex.response
+      else
+        assert_equal InteltechSms::Unauthorized.new(TEST_SMS, "2006"), ex.response
+      end
     end
 
     should "return an array Unauthorized responses when send_multiple_sms is called" do
       @res = @bad_gateway.send_multiple_sms [TEST_SMS, TEST_SMS2], 'Test from Ruby - with blank username return an array Unauthorized responses when send_multiple_sms is called' << UNIQUE_STRING
       assert_kind_of Array, @res
-      assert_equal 2, @res.length, "send_multiple_sms returns results for each sms sent"
-      assert_kind_of InteltechSms::Unauthorized, @res[0], "send_multiple_sms returns Unauthorized for 1st element"
-      assert_equal InteltechSms::Unauthorized.new(TEST_SMS, "2006"), @res[0]
-      assert_kind_of InteltechSms::Unauthorized, @res[1], "send_multiple_sms returns Unauthorized for 2nd element"
-      assert_equal InteltechSms::Unauthorized.new(TEST_SMS2, "2006"), @res[1]
+      if @res.length == 1
+        assert_kind_of InteltechSms::Failure, @res[0], "send_multiple_sms can trigger internal error"
+        assert_equal InteltechSms::Failure.new('none', '2102'), @res[0]
+      else
+        assert_equal 2, @res.length, "send_multiple_sms returns results for each sms sent"
+        assert_kind_of InteltechSms::Unauthorized, @res[0], "send_multiple_sms returns Unauthorized for 1st element"
+        assert_equal InteltechSms::Unauthorized.new(TEST_SMS, "2006"), @res[0]
+        assert_kind_of InteltechSms::Unauthorized, @res[1], "send_multiple_sms returns Unauthorized for 2nd element"
+        assert_equal InteltechSms::Unauthorized.new(TEST_SMS2, "2006"), @res[1]
+      end
     end
 
   end
