@@ -5,11 +5,11 @@
 
 Gem::Specification.new do |s|
   s.name = "inteltech_sms"
-  s.version = "1.1.0"
+  s.version = "1.1.1"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Ian Heggie"]
-  s.date = "2013-12-01"
+  s.date = "2014-02-17"
   s.description = "Ruby gem that provides an InteltechSms class to check credit and send SMS text messages to single or multiple recipients"
   s.email = "ian@heggie.biz"
   s.extra_rdoc_files = [
@@ -19,7 +19,6 @@ Gem::Specification.new do |s|
   s.files = [
     ".coveralls.yml",
     ".document",
-    ".rbenv-gemsets",
     ".travis.yml",
     "Gemfile",
     "LICENSE.txt",
@@ -46,7 +45,7 @@ Gem::Specification.new do |s|
       s.add_development_dependency(%q<rdoc>, [">= 3.12"])
       s.add_development_dependency(%q<bundler>, [">= 1.2.3"])
       s.add_development_dependency(%q<jeweler>, [">= 1.8.4"])
-      s.add_development_dependency(%q<travis>, [">= 0"])
+      s.add_development_dependency(%q<travis>, [">= 1.6.0"])
       s.add_development_dependency(%q<travis-lint>, [">= 0"])
       s.add_development_dependency(%q<shoulda-context>, [">= 0"])
       s.add_development_dependency(%q<coveralls>, [">= 0"])
@@ -54,7 +53,7 @@ Gem::Specification.new do |s|
       s.add_dependency(%q<rdoc>, [">= 3.12"])
       s.add_dependency(%q<bundler>, [">= 1.2.3"])
       s.add_dependency(%q<jeweler>, [">= 1.8.4"])
-      s.add_dependency(%q<travis>, [">= 0"])
+      s.add_dependency(%q<travis>, [">= 1.6.0"])
       s.add_dependency(%q<travis-lint>, [">= 0"])
       s.add_dependency(%q<shoulda-context>, [">= 0"])
       s.add_dependency(%q<coveralls>, [">= 0"])
@@ -63,7 +62,7 @@ Gem::Specification.new do |s|
     s.add_dependency(%q<rdoc>, [">= 3.12"])
     s.add_dependency(%q<bundler>, [">= 1.2.3"])
     s.add_dependency(%q<jeweler>, [">= 1.8.4"])
-    s.add_dependency(%q<travis>, [">= 0"])
+    s.add_dependency(%q<travis>, [">= 1.6.0"])
     s.add_dependency(%q<travis-lint>, [">= 0"])
     s.add_dependency(%q<shoulda-context>, [">= 0"])
     s.add_dependency(%q<coveralls>, [">= 0"])
