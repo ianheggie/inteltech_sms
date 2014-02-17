@@ -1,6 +1,6 @@
 = inteltech_sms
 
-InteltechSms is a ruby gem that provides an InteltechSms class to check credit and send SMS text messages to single or multiple recipients
+InteltechSms is a ruby gem that provides an InteltechSms class to check credit and send SMS text messages to single or multiple recipients.
 
 == Installation
 
@@ -130,11 +130,12 @@ These are passed to the send_sms and send_multiple_sms methods via an optional h
 
 == Copyright
 
-Copyright (c) 2013 Ian Heggie. See LICENSE.txt for further details.
+Copyright (c) 2013 Ian Heggie - MIT License. See LICENSE.txt for further details.
 
 === Known issues
 
-* The SMS Gateway no longer responds with 2015 Bad number when a mobile number is not connected. The gateway accepts the request and charges for it, then posts the failure in the history log. (Tested using numbers reserved for fictitious use in films and books etc - tests are now disabled)
+* The SMS Gateway no longer responds with 2015 Bad number when a mobile number is not connected. The gateway accepts the request and charges for it, then posts the failure in the history log. (Previously tested using numbers reserved for fictitious use in films and books etc - tests are now disabled)
+* The SMS Gateway no longer responds with 2006 Unathorized when a blank username is submitted (An internal 2102 error is returned instead).
 
 === Main Contributors
 
@@ -143,5 +144,5 @@ Copyright (c) 2013 Ian Heggie. See LICENSE.txt for further details.
 
 === Other/Ongoing Contributors
 
-* Intelligent Technologies (inteltech.com.au) - Contributing an hour and 5% commission to development costs
+* Intelligent Technologies (inteltech.com.au) - Contributed an hour and 5% commission to development costs
 
