@@ -13,6 +13,12 @@ group :development do
   gem "travis-lint", ">= 0"
   gem 'shoulda-context', '>= 0'
   gem 'coveralls', :require => false
+
+  if RUBY_VERSION =~ /^1.8/
+    gem 'nokogiri', '~> 1.5.11' # dependency of jeweler, later versions require ruby 1.9.1
+    # mime-types 2.0 requires Ruby version >= 1.9.2
+    gem "mime-types", "< 2.0"
+  end
 end
 
 group :test do
