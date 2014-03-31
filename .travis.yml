@@ -25,8 +25,12 @@ rvm:
   - 1.8.7
   - 1.9.3
   - 2.0.0
-  - rbx
+  - 2.1.0
+  - rbx-2.2.6
   - jruby-19mode
+  - rbx
+  - ruby-head
+  - jruby-head
   - ree
 
 matrix:
@@ -67,6 +71,8 @@ matrix:
       - TEST_GEM=true
       - secure: "D6Sd+bPmNb3P+98W1arc+SbaFV8oC+0NhnZX9fcoIqCHfnVpt6Vd54idUxJv\nhhFUFmySl17zCX/HRaVoscpCYPcJWRWIeXSD4qrHlObaTx+BDKlMAlWl/Y7d\nQy9c4g+QbDhz94l3DeNW7VbCYz/YYyRPBCcZK+K3H1KPmMtngRU="
   allow_failures:
+    - rvm: ruby-head
+    - rvm: jruby-head
     - rvm: rbx
     - rvm: rbx
       env:
