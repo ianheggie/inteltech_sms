@@ -15,6 +15,7 @@ class TestInteltechSms < Test::Unit::TestCase
   TEST_SMS2 = '+8611111111111'
   # http://www.acma.gov.au/Citizen/Consumer-info/All-about-numbers/Special-numbers/fictitious-numbers-for-radio-film-and-television-i-acma
   BAD_SMS = '0491570156'
+  BAD_SMS2 = '0491570157'
 
   LANDLINE_SMS = '0862252608'  # InteltechSms's landline
 
@@ -198,19 +199,19 @@ class TestInteltechSms < Test::Unit::TestCase
 
     should "raise an NoCredit Error exception when send_sms is called" do
       ex = assert_raises InteltechSms::Error do
-        @nocredit_gateway.send_sms TEST_SMS, 'Test from ruby - no credit on send_sms' << UNIQUE_STRING
+        @nocredit_gateway.send_sms BAD_SMS, 'Test from ruby - no credit on send_sms' << UNIQUE_STRING
       end
-      assert_equal InteltechSms::NoCredit.new(TEST_SMS, "2018"), ex.response
+      assert_equal InteltechSms::NoCredit.new(BAD_SMS, "2018"), ex.response
     end
 
     should "return an array NoCredit responses when send_multiple_sms is called" do
-      @res = @nocredit_gateway.send_multiple_sms [TEST_SMS, TEST_SMS2], 'Test from Ruby - return an array NoCredit responses when send_multiple_sms is called' << UNIQUE_STRING
+      @res = @nocredit_gateway.send_multiple_sms [BAD_SMS, BAD_SMS2], 'Test from Ruby - return an array NoCredit responses when send_multiple_sms is called' << UNIQUE_STRING
       assert_kind_of Array, @res
       assert_equal 2, @res.length, "send_multiple_sms returns results for each sms sent"
       assert_kind_of InteltechSms::NoCredit, @res[0], "send_multiple_sms returns NoCredit for 1st element"
-      assert_equal InteltechSms::NoCredit.new(TEST_SMS, "2018"), @res[0]
+      assert_equal InteltechSms::NoCredit.new(BAD_SMS, "2018"), @res[0]
       assert_kind_of InteltechSms::NoCredit, @res[1], "send_multiple_sms returns NoCredit for 2nd element"
-      assert_equal InteltechSms::NoCredit.new(TEST_SMS2, "2018"), @res[1]
+      assert_equal InteltechSms::NoCredit.new(BAD_SMS2, "2018"), @res[1]
     end
 
   end
