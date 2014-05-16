@@ -41,8 +41,8 @@ Example ruby code:
     begin
       res = gateway.send_sms(test_sms,'Test from Ruby')
       puts "send_sms to #{res.sms} was successfull."
-    rescue ex => InteltechSms::Error
-      puts "send_sms to #{res.sms} failed. Gateway response #{ex.response.class} with code #{ex.response.response_code}."
+    rescue InteltechSms::Error => ex
+      puts "send_sms to #{test_sms} failed. Gateway response #{ex.response.class} with code #{ex.response.response_code}."
     end
 
     res2 = gateway.send_multiple_sms([test_sms, test_sms2, landline_sms],'Test from Ruby to multiple numbers')
@@ -80,8 +80,8 @@ Example ruby code:
       # This will return no credit
       res = gateway.send_sms(test_sms,'Test from Ruby')
       puts "send_sms to #{res.sms} was successfull."
-    rescue ex => InteltechSms::Error
-      puts "send_sms to #{res.sms} failed. Gateway response #{ex.response.class} with code #{ex.response.response_code}."
+    rescue InteltechSms::Error => ex
+      puts "send_sms to #{test_sms} failed. Gateway response #{ex.response.class} with code #{ex.response.response_code}."
     end
 
     res2 = gateway.send_multiple_sms([test_sms, test_sms2, landline_sms],'Test from Ruby to multiple numbers')
@@ -136,6 +136,7 @@ Copyright (c) 2013 Ian Heggie - MIT License. See LICENSE.txt for further details
 
 * The SMS Gateway no longer responds with 2015 Bad number when a mobile number is not connected. The gateway accepts the request and charges for it, then posts the failure in the history log. (Previously tested using numbers reserved for fictitious use in films and books etc - tests are now disabled)
 * The SMS Gateway no longer responds with 2006 Unathorized when a blank username is submitted (An internal 2102 error is returned instead).
+* The SMS Gateway no longer warns when credit has run out (Sucess is returned instead
 
 === Main Contributors
 
