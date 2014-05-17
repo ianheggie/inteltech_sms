@@ -16,6 +16,7 @@ group :development do
   end
   gem 'shoulda-context', '>= 0'
   gem 'coveralls', :require => false
+  gem 'simplecov'
 
   if RUBY_VERSION =~ /^1.8/
     gem 'nokogiri', '~> 1.5.11' # dependency of jeweler, later versions require ruby 1.9.1
