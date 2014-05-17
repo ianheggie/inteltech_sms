@@ -5,11 +5,11 @@
 
 Gem::Specification.new do |s|
   s.name = "inteltech_sms"
-  s.version = "1.1.1"
+  s.version = "1.1.2"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Ian Heggie"]
-  s.date = "2014-02-17"
+  s.date = "2014-05-17"
   s.description = "Ruby gem that provides an InteltechSms class to check credit and send SMS text messages to single or multiple recipients"
   s.email = "ian@heggie.biz"
   s.extra_rdoc_files = [
@@ -35,7 +35,7 @@ Gem::Specification.new do |s|
   s.homepage = "http://github.com/ianheggie/inteltech_sms"
   s.licenses = ["MIT"]
   s.require_paths = ["lib"]
-  s.rubygems_version = "1.8.23"
+  s.rubygems_version = "1.8.23.2"
   s.summary = "Ruby Gem to send SMS via inteltech.com.au"
 
   if s.respond_to? :specification_version then
@@ -49,6 +49,7 @@ Gem::Specification.new do |s|
       s.add_development_dependency(%q<travis-lint>, [">= 0"])
       s.add_development_dependency(%q<shoulda-context>, [">= 0"])
       s.add_development_dependency(%q<coveralls>, [">= 0"])
+      s.add_development_dependency(%q<simplecov>, [">= 0"])
     else
       s.add_dependency(%q<rdoc>, [">= 3.12"])
       s.add_dependency(%q<bundler>, [">= 1.2.3"])
@@ -57,6 +58,7 @@ Gem::Specification.new do |s|
       s.add_dependency(%q<travis-lint>, [">= 0"])
       s.add_dependency(%q<shoulda-context>, [">= 0"])
       s.add_dependency(%q<coveralls>, [">= 0"])
+      s.add_dependency(%q<simplecov>, [">= 0"])
     end
   else
     s.add_dependency(%q<rdoc>, [">= 3.12"])
@@ -66,6 +68,7 @@ Gem::Specification.new do |s|
     s.add_dependency(%q<travis-lint>, [">= 0"])
     s.add_dependency(%q<shoulda-context>, [">= 0"])
     s.add_dependency(%q<coveralls>, [">= 0"])
+    s.add_dependency(%q<simplecov>, [">= 0"])
   end
 end
 
