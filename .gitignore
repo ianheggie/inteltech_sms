@@ -21,5 +21,9 @@ Gemfile.lock
 # Temp files
 tmp/
 
+# bundler
+bin/
+
 # See: https://gist.github.com/ianheggie/9327010
 # for Global git ignore for OS/IDE/temp/backup files
+
