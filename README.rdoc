@@ -2,6 +2,8 @@
 
 InteltechSms is a ruby gem that provides an InteltechSms class to check credit and send SMS text messages to single or multiple recipients.
 
+*The API has changed and this gem no longer works - use clicksend's new code instead*
+
 == Installation
 
 As a Plugin (eg rails 2.3.x)
